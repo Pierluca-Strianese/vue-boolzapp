@@ -141,6 +141,7 @@ p {
     background-image: url("../img/mine.jpg");
     height: calc(90vh - (var(--height_message_bar) + var(--height_myuser_bar)));
     overflow: scroll;
+    flex-direction: column;
 }
 
 .chat .message_box {
@@ -156,4 +157,17 @@ p {
 .message_box .input_text {
     width: 600px;
     border-radius: 8px;
+}
+
+.my_message {
+    width: 250px;
+    height: fit-content;
+    background-color: #D5F9BA;
+    align-self: flex-end;
+}
+
+.other_message {
+    width: 250px;
+    height: fit-content;
+    background-color: white;
 }
