@@ -160,6 +160,7 @@ p {
 }
 
 .my_message {
+    position: relative;
     width: 250px;
     height: fit-content;
     background-color: #D5F9BA;
@@ -167,7 +168,16 @@ p {
 }
 
 .other_message {
+    position: relative;
     width: 250px;
     height: fit-content;
     background-color: white;
+}
+
+.time_message {
+    position: absolute;
+    bottom: 4px;
+    right: 10px;
+    font-size: .6rem;
+    color: #c0bebd;
 }
