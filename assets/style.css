@@ -2,13 +2,14 @@
     --height_myuser_bar: 70px;
     --height_allert_notifiche: 90px;
     --height_search_chat: 50px;
-
+    --height_message_bar: 80px;
+    --hover_background: #e3e3e3;
+    --color_icon: #74869A;
 }
 
 p {
     margin-bottom: 0px;
 }
-
 
 .background {
     display: grid;
@@ -19,32 +20,52 @@ p {
 }
 
 .container_box {
-    display: flex;
     background-color: whitesmoke;
+    display: flex;
     width: 80vw;
     height: 90vh;
 }
 
 .menu_chat {
-    background: gold;
     height: 100%;
     width: 30%;
 }
 
 .chat {
-    background-color: aqua;
     height: 100%;
     width: 70%;
 }
 
 .myuser_bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background-color: #EAEAEA;
     height: var(--height_myuser_bar);
 }
 
+.chat_bar i ,.myuser_bar i {
+    color: #B1B1B1;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.chat_bar i:hover ,.myuser_bar i:hover {
+    background-color: var(--hover_background);
+}   
+
 .allert_notifiche {
+    display: flex;
+    align-items: center;
     background-color: #8EDAFD;
     height: var(--height_allert_notifiche);
+    font-size: .8rem;
+}
+
+.allert_notifiche i {
+    font-size: 1.5rem;
+    padding: .5em;
+    background-color: white;
+    color: #8EDAFD;
 }
 
 .search_chat {
@@ -68,6 +89,17 @@ p {
     height: 65px;
 }
 
+.chat_item:hover {
+    background-color: var(--hover_background);
+    cursor: pointer;
+}
+
+.chat_bar img, .myuser_bar img {
+    border-radius: 50%;
+    height: 45px;
+    aspect-ratio: 1 / 1;
+}
+
 .chat_item img {
     border-radius: 50%;
     height: 55px;
@@ -89,4 +121,39 @@ p {
     right: 7px;
     top: 7px;
     font-size: .7rem;
+}
+
+/* lato chat */
+
+.chat .chat_bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #EAEAEA;
+    height: var(--height_myuser_bar);
+}
+
+.chat_bar .last_access {
+    font-size: .8rem;
+}
+
+.chat .chat_message {
+    background-image: url("../img/mine.jpg");
+    height: calc(90vh - (var(--height_message_bar) + var(--height_myuser_bar)));
+    overflow: scroll;
+}
+
+.chat .message_box {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: var(--height_message_bar);
+    background-color: #F3EEEA;
+    font-size: 1.4rem;
+    color: var(--color_icon);
+}
+
+.message_box .input_text {
+    width: 600px;
+    border-radius: 8px;
 }
