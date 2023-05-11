@@ -2,11 +2,12 @@
     --height_myuser_bar: 70px;
     --height_allert_notifiche: 90px;
     --height_search_chat: 50px;
-    --height_message_bar: 80px;
+    --height_message_bar: 60px;
     --hover_background: #e3e3e3;
     --color_icon: #74869A;
     --bg_sent: #D5F9BA;
     --bg_received: white;
+    --bg-general: #fafafa;
 }
 
 p {
@@ -26,6 +27,8 @@ p {
 }
 
 .chat_hiden { 
+    flex-grow: 1;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -48,7 +51,7 @@ p {
     color: #8EDAFD;
 }
 
-/* section MAIN SECTION */
+/* section MAIN SECTION & MAIN CLASS */
 
 .background {
     display: grid;
@@ -59,7 +62,7 @@ p {
 }
 
 .container_box {
-    background-color: whitesmoke;
+    background-color: white;
     display: flex;
     width: 75vw;
     height: 90vh;
@@ -73,6 +76,13 @@ p {
 .chat {
     height: 100%;
     width: 75%;
+}
+
+.name {
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* section MENU CHAT */
@@ -90,31 +100,41 @@ p {
     align-items: center;
     padding: .5rem;
     background-color: #8EDAFD;
-    height: var(--height_allert_notifiche);
+    height:fit-content;
     font-size: .8rem;
 }
 
 /* SEARCH CHAT */
 
-.menu_chat .search_chat {
+.menu_chat .search {
     position: relative;
     display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    width: 100%;
-    height: var(--height_search_chat);
+    flex: 0 0 auto;
     background-color: #FAFAFA;
 }
 
-.search_chat .input_search {
-    width: auto;
+.search .input_group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--bg-general);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.search .input_group .input_search {
+    flex: 1 0 0;
+    min-width: 0;
+    background-color: var(--bg-general);
+    border: none;
 }
 
 /* section CHAT LIST & ITEMS */
 
 .chats_list {
     overflow: scroll;
-    height: calc(90vh - (var(--height_allert_notifiche) + var(--height_myuser_bar) + var(--height_search_chat)));
+    height:fit-content;
 }
 
 .chats_list .chat_item {
@@ -173,8 +193,11 @@ p {
 }
 
 .message_box .input_text {
-    width: 600px;
-    border-radius: 8px;
+    flex: 1 0 0;
+    min-width: 0;
+    background-color: var(--bg-general);
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 /* section CHAT MESSAGES */
@@ -199,6 +222,7 @@ p {
 
 .chat_messages .received {
     background-color: var(--bg_received);
+    align-self: flex-start;
 }
 
 .chat_messages .message .time_message {

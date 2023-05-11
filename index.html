@@ -27,10 +27,8 @@
                 <div class="menu_chat">
 <!-- MY USER CHAT -->
                     <div class="myuser_bar ps-3 pe-3">
-                        <div>
-                            <img src="img/avatar_io.jpg" alt="" class="me-2 chat_hiden">
-                            Pierluca
-                        </div>
+                        <img src="img/avatar_io.jpg" alt="" class="me-2 chat_hiden">
+                        <span class="name"> Pierluca</span>
                         <div>
                             <i class="fa-solid fa-circle-notch p-2"></i>
                             <i class="fa-solid fa-message p-2"></i>
@@ -46,14 +44,10 @@
                         </span>
                     </div>
 <!-- BAR SEARCH CHAT -->
-                    <div class="search_chat">
-                        <div class="p-2 w-100">
-                            <i class="fa-solid fa-magnifying-glass me-1 ms-1"></i>
-                            <input 
-                                type="text" 
-                                class="input_search" 
-                                placeholder="Cerca o inizia una nuova chat"
-                            >
+                    <div class="search p-2">
+                        <div class="input_group p-1">
+                            <i class="fa fa-search icon p-1" aria-hidden="true"></i>
+                            <input type="text" class="input_search"  placeholder="Cerca o inizia una nuova chat">
                         </div>
                     </div>
 <!-- CHAT LIST -->
@@ -62,11 +56,12 @@
                         <div
                             v-for="(contact,i) in contacts"
                             class="chat_item ps-2 border-bottom"
+                            @click="setCurrentContact(i)"
                         >
                             <img :src= "contact.avatar" :alt="contact.name">
                             <div class="info_chat ms-3">
                                 <p class="name pt-1 chat_hiden"> {{ contact.name }} </p>
-                                <p class="last_message fw-lighter chat_hiden"> Ultimo messaggio </p>
+                                <p class="last_message fw-lighter chat_hiden"> Ultimo messaggio Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis enim suscipit neque obcaecati illo dicta voluptate assumenda temporibus ratione cum adipisci vitae et dolores, explicabo animi eius minima tenetur deserunt!</p>
                                 <p class="hour"> 12:00 </p>
                             </div>
                         </div>
@@ -94,24 +89,20 @@
                     </div>
 <!-- CHAT MESSAGE -->
                     <div class="chat_messages p-4 d-flex">
-                        <div class="message sent p-3 m-2 rounded-4"> 
-                            Prova prova 
+                        <div 
+                            v-for="message in contacts[currentIndex].messages"
+                            class="message sent p-3 m-2 rounded-4"
+                            :class="message.status"
+                        > 
+                            {{message.message}}
                             <span class="time_message"> 15_50 </span>
                         </div>
-                        <div class="message received p-3 m-2 rounded-4"> 
-                            Prova Prova 
-                            <span class="time_message"> 15:50 </span>
-                        </div>
-                        <div class="message received p-3 m-2 rounded-4"> 
-                            Prova Prova 
-                            <span class="time_message"> 15:50 </span>
-                        </div> 
                     </div>
 <!-- MESSAGE BOX INPUT -->
                     <div class="message_box">
-                        <i class="fa-regular fa-face-smile ms-2 me-2"></i>
-                        <input type="text" placeholder="Scrivi un messaggio" class="input_text">
-                        <i class="fa-solid fa-microphone ms-2 me-2"></i>
+                        <i class="fa-regular fa-face-smile m-4"></i>
+                        <input type="text" placeholder="Scrivi un messaggio" class="input_text p-1">
+                        <i class="fa-solid fa-microphone m-4"></i>
                     </div>
                 </div>
             </div>
