@@ -33,6 +33,10 @@ p {
     text-overflow: ellipsis;
 }
 
+.active {
+    background-color: var(--hover_background)
+}
+
 /* HOVER */
 
 .chat_item:hover {

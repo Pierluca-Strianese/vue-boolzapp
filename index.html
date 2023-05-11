@@ -57,11 +57,12 @@
                             v-for="(contact,i) in contacts"
                             class="chat_item ps-2 border-bottom"
                             @click="setCurrentContact(i)"
+                            :class="{active: i == currentIndex}"
                         >
                             <img :src= "contact.avatar" :alt="contact.name">
                             <div class="info_chat ms-3">
                                 <p class="name pt-1 chat_hiden"> {{ contact.name }} </p>
-                                <p class="last_message fw-lighter chat_hiden"> Ultimo messaggio Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perferendis enim suscipit neque obcaecati illo dicta voluptate assumenda temporibus ratione cum adipisci vitae et dolores, explicabo animi eius minima tenetur deserunt!</p>
+                                <p class="last_message fw-lighter chat_hiden"> </p>
                                 <p class="hour"> 12:00 </p>
                             </div>
                         </div>
@@ -75,10 +76,10 @@
 <!-- CHAT BAR TOP -->
                     <div class="chat_bar ps-3 pe-3 border-start">
                         <div class="d-flex">
-                            <img src="img/avatar_1.jpg" alt="" class="me-3">
+                            <img :src="contacts[currentIndex].avatar" alt="" class="me-3">
                             <span>
-                                <span class="name_chat d-block"> Pierluca </span>
-                                <span class="last_access d-block fw-lighter"> ultimo accesso</span>
+                                <span class="name_chat d-block"> {{contacts[currentIndex].name}} </span>
+                                <span class="last_access d-block fw-lighter"> ultimo accesso: </span>
                             </span>
                         </div>
                         <div>
