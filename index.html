@@ -95,13 +95,19 @@
                             :class="message.status"
                         > 
                             {{message.message}}
-                            <span class="time_message"> 15_50 </span>
+                            <span class="time_message"> {{ message.date }} </span>
                         </div>
                     </div>
 <!-- MESSAGE BOX INPUT -->
                     <div class="message_box">
                         <i class="fa-regular fa-face-smile m-4"></i>
-                        <input type="text" placeholder="Scrivi un messaggio" class="input_text p-1">
+                        <input 
+                            type="text"
+                            placeholder="Scrivi un messaggio" 
+                            class="input_text p-1"
+                            @keyup.enter="addNewMessage()" 
+                            v-model="newText"
+                        >
                         <i class="fa-solid fa-microphone m-4"></i>
                     </div>
                 </div>

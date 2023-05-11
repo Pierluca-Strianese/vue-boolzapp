@@ -1,6 +1,7 @@
 const app = Vue.createApp({
     data(){
         return {
+            newText: '',
             currentIndex: 0,
             contacts: [
                 {
@@ -173,6 +174,30 @@ const app = Vue.createApp({
         setCurrentContact(i) {
             this.currentIndex = i; 
         },
+
+        addNewMessage() {
+            let cleanedText = this.newText.trim();
+            if (cleanedText != ''){
+                this.contacts[this.currentIndex].messages.push({
+                    date: '',
+                    message: (cleanedText),
+                    status: 'sent'
+                });
+                this.newText = '';
+            }
+            this.autoReply();
+        },
+
+        autoReply: function() {
+            setTimeout(() => {
+                this.contacts[this.currentIndex].messages.push({
+                    date: '',
+                    message: 'ok!',
+                    status: 'received',
+                })
+            }, 1000);
+        },
+        
     },
 });
 
