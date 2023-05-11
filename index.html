@@ -20,11 +20,15 @@
 
     <body>
         <div class="background">
-            <div class="container_box" id="app">
+            <div class="container_box" id="root">
+
+<!-- MAIN SECTION MENU CHAT -->
+
                 <div class="menu_chat">
+<!-- MY USER CHAT -->
                     <div class="myuser_bar ps-3 pe-3">
                         <div>
-                            <img src="img/avatar_1.jpg" alt="" class="me-2">
+                            <img src="img/avatar_1.jpg" alt="" class="me-2 chat_hiden">
                             Pierluca
                         </div>
                         <div>
@@ -33,39 +37,46 @@
                             <i class="fa-solid fa-ellipsis-vertical p-2"></i>
                         </div>
                     </div>
+<!-- ALLERT NOTIFICHE -->
                     <div class="allert_notifiche">
                         <i class="fa-regular fa-bell-slash ms-3 me-2 rounded-circle"></i>
                         <span> 
-                            <span class="d-block fs-6"> Ricevi le notifiche di nuovi messaggi </span>
-                            <a href="#" class="d-block fw-lighter text-decoration-underline"> Attiva notifiche desktop </a>
+                            <span class="d-block fs-6 chat_hiden"> Ricevi le notifiche di nuovi messaggi </span>
+                            <a href="#" class="d-block fw-lighter text-decoration-underline chat_hiden"> Attiva notifiche desktop </a>
                         </span>
                     </div>
-
+<!-- BAR SEARCH CHAT -->
                     <div class="search_chat">
                         <div class="p-2 w-100">
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <i class="fa-solid fa-magnifying-glass me-1 ms-1"></i>
                             <input 
                                 type="text" 
-                                class="w-90" 
+                                class="input_search" 
                                 placeholder="Cerca o inizia una nuova chat"
                             >
                         </div>
                     </div>
-
-                    <div class="chat_list bg-white">
-                        <div class="chat_item ps-2 border-bottom">
+<!-- CHAT LIST -->
+                    <div class="chats_list bg-white">
+<!-- CHAT ITEM -->
+                        <div 
+                            class="chat_item ps-2 border-bottom"
+                        >
                             <img src="img/avatar_1.jpg" alt="">
                             <div class="info_chat ms-3">
-                                <p class="name pt-1"> Pierluca </p>
-                                <p class="last_message fw-lighter"> ultimo messaggio inviato</p>
+                                <p class="name pt-1 chat_hiden"> {{ contact.name }} </p>
+                                <p class="last_message fw-lighter chat_hiden"> Ultimo messaggio </p>
                                 <p class="hour"> 12:00 </p>
                             </div>
                         </div>
 
                     </div>
-
                 </div>
+
+<!-- MAIN SECTION CHAT -->
+
                 <div class="chat">
+<!-- CHAT BAR TOP -->
                     <div class="chat_bar ps-3 pe-3 border-start">
                         <div class="d-flex">
                             <img src="img/avatar_1.jpg" alt="" class="me-3">
@@ -73,7 +84,6 @@
                                 <span class="name_chat d-block"> Pierluca </span>
                                 <span class="last_access d-block fw-lighter"> ultimo accesso</span>
                             </span>
-                            
                         </div>
                         <div>
                             <i class="fa-solid fa-magnifying-glass p-2"></i>
@@ -81,28 +91,32 @@
                             <i class="fa-solid fa-ellipsis-vertical p-2"></i>
                         </div>
                     </div>
-
-                    <div class="chat_message p-4 d-flex">
-                        <div class="my_message p-3 m-2 rounded-4"> 
+<!-- CHAT MESSAGE -->
+                    <div class="chat_messages p-4 d-flex">
+                        <div class="message sent p-3 m-2 rounded-4"> 
                             Prova prova 
                             <span class="time_message"> 15_50 </span>
                         </div>
-                        <div class="other_message p-3 m-2 rounded-4"> 
+                        <div class="message received p-3 m-2 rounded-4"> 
                             Prova Prova 
                             <span class="time_message"> 15:50 </span>
                         </div>
+                        <div class="message received p-3 m-2 rounded-4"> 
+                            Prova Prova 
+                            <span class="time_message"> 15:50 </span>
+                        </div> 
                     </div>
-
+<!-- MESSAGE BOX INPUT -->
                     <div class="message_box">
-                        <i class="fa-regular fa-face-smile ms-2"></i>
+                        <i class="fa-regular fa-face-smile ms-2 me-2"></i>
                         <input type="text" placeholder="Scrivi un messaggio" class="input_text">
-                        <i class="fa-solid fa-microphone me-2"></i>
+                        <i class="fa-solid fa-microphone ms-2 me-2"></i>
                     </div>
                 </div>
             </div>
         </div>
     </body>
-    <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="scripts/script.js"></script> -->
+    <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+    <!-- <script src="scripts/script.js"></script> -->
 </body>
 </html>

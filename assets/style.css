@@ -5,11 +5,50 @@
     --height_message_bar: 80px;
     --hover_background: #e3e3e3;
     --color_icon: #74869A;
+    --bg_sent: #D5F9BA;
+    --bg_received: white;
 }
 
 p {
     margin-bottom: 0px;
 }
+
+.chat_bar i ,.myuser_bar i {
+    color: #B1B1B1;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.chat_bar img, .myuser_bar img {
+    border-radius: 50%;
+    height: 45px;
+    aspect-ratio: 1 / 1;
+}
+
+.chat_hiden { 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* HOVER */
+
+.chat_item:hover {
+    background-color: var(--hover_background);
+    cursor: pointer;
+}
+
+.chat_bar i:hover ,.myuser_bar i:hover {
+    background-color: var(--hover_background);
+}   
+
+.menu_chat .allert_notifiche i {
+    font-size: 1.5rem;
+    padding: .4em;
+    background-color: white;
+    color: #8EDAFD;
+}
+
+/* section MAIN SECTION */
 
 .background {
     display: grid;
@@ -22,21 +61,23 @@ p {
 .container_box {
     background-color: whitesmoke;
     display: flex;
-    width: 80vw;
+    width: 75vw;
     height: 90vh;
 }
 
 .menu_chat {
     height: 100%;
-    width: 30%;
+    width: 25%;
 }
 
 .chat {
     height: 100%;
-    width: 70%;
+    width: 75%;
 }
 
-.myuser_bar {
+/* section MENU CHAT */
+
+.menu_chat .myuser_bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -44,31 +85,18 @@ p {
     height: var(--height_myuser_bar);
 }
 
-.chat_bar i ,.myuser_bar i {
-    color: #B1B1B1;
-    cursor: pointer;
-    border-radius: 5px;
-}
-.chat_bar i:hover ,.myuser_bar i:hover {
-    background-color: var(--hover_background);
-}   
-
-.allert_notifiche {
+.menu_chat .allert_notifiche {
     display: flex;
     align-items: center;
+    padding: .5rem;
     background-color: #8EDAFD;
     height: var(--height_allert_notifiche);
     font-size: .8rem;
 }
 
-.allert_notifiche i {
-    font-size: 1.5rem;
-    padding: .5em;
-    background-color: white;
-    color: #8EDAFD;
-}
+/* SEARCH CHAT */
 
-.search_chat {
+.menu_chat .search_chat {
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -78,26 +106,21 @@ p {
     background-color: #FAFAFA;
 }
 
-.chat_list {
+.search_chat .input_search {
+    width: auto;
+}
+
+/* section CHAT LIST & ITEMS */
+
+.chats_list {
     overflow: scroll;
     height: calc(90vh - (var(--height_allert_notifiche) + var(--height_myuser_bar) + var(--height_search_chat)));
 }
 
-.chat_item {
+.chats_list .chat_item {
     display: flex;
     align-items: center;
     height: 65px;
-}
-
-.chat_item:hover {
-    background-color: var(--hover_background);
-    cursor: pointer;
-}
-
-.chat_bar img, .myuser_bar img {
-    border-radius: 50%;
-    height: 45px;
-    aspect-ratio: 1 / 1;
 }
 
 .chat_item img {
@@ -112,11 +135,11 @@ p {
     height: 100%;
 }
 
-.info_chat .last_message {
+.chat_item .info_chat .last_message {
     font-size: .8rem;
 }
 
-.hour {
+.chat_item .info_chat .hour {
     position: absolute;
     right: 7px;
     top: 7px;
@@ -137,12 +160,7 @@ p {
     font-size: .8rem;
 }
 
-.chat .chat_message {
-    background-image: url("../img/mine.jpg");
-    height: calc(90vh - (var(--height_message_bar) + var(--height_myuser_bar)));
-    overflow: scroll;
-    flex-direction: column;
-}
+/* section MESSAGE BOX INPUT */
 
 .chat .message_box {
     display: flex;
@@ -159,22 +177,31 @@ p {
     border-radius: 8px;
 }
 
-.my_message {
+/* section CHAT MESSAGES */
+
+.chat .chat_messages {
+    background-image: url("../img/mine.jpg");
+    height: calc(90vh - (var(--height_message_bar) + var(--height_myuser_bar)));
+    overflow: scroll;
+    flex-direction: column;
+}
+
+.chat_messages .message {
     position: relative;
     width: 250px;
     height: fit-content;
-    background-color: #D5F9BA;
+}
+
+.chat_messages .sent {
+    background-color: var(--bg_sent);
     align-self: flex-end;
 }
 
-.other_message {
-    position: relative;
-    width: 250px;
-    height: fit-content;
-    background-color: white;
+.chat_messages .received {
+    background-color: var(--bg_received);
 }
 
-.time_message {
+.chat_messages .message .time_message {
     position: absolute;
     bottom: 4px;
     right: 10px;
