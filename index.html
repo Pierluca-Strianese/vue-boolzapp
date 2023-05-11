@@ -28,7 +28,7 @@
 <!-- MY USER CHAT -->
                     <div class="myuser_bar ps-3 pe-3">
                         <div>
-                            <img src="img/avatar_1.jpg" alt="" class="me-2 chat_hiden">
+                            <img src="img/avatar_io.jpg" alt="" class="me-2 chat_hiden">
                             Pierluca
                         </div>
                         <div>
@@ -59,10 +59,11 @@
 <!-- CHAT LIST -->
                     <div class="chats_list bg-white">
 <!-- CHAT ITEM -->
-                        <div 
+                        <div
+                            v-for="(contact,i) in contacts"
                             class="chat_item ps-2 border-bottom"
                         >
-                            <img src="img/avatar_1.jpg" alt="">
+                            <img :src= "contact.avatar" :alt="contact.name">
                             <div class="info_chat ms-3">
                                 <p class="name pt-1 chat_hiden"> {{ contact.name }} </p>
                                 <p class="last_message fw-lighter chat_hiden"> Ultimo messaggio </p>
@@ -116,7 +117,7 @@
             </div>
         </div>
     </body>
-    <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
-    <!-- <script src="scripts/script.js"></script> -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="scripts/script.js"></script>
 </body>
 </html>
