@@ -186,7 +186,7 @@ const app = Vue.createApp({
             let cleanedText = this.newText.trim();
             if (cleanedText != ''){
                 this.contacts[this.currentIndex].messages.push({
-                    date: luxon.DateTime.now().toFormat('dd/MM/yyyy  HH:mm:ss'),
+                    date: luxon.DateTime.now().toFormat('dd/MM/yyyy HH:mm:ss'),
                     message: (cleanedText),
                     status: 'sent'
                 });
@@ -199,7 +199,7 @@ const app = Vue.createApp({
             let message = this.contacts[this.currentIndex].name + '... sono tuo padre!'
             setTimeout(() => {
                 this.contacts[this.currentIndex].messages.push({
-                    date: luxon.DateTime.now().toFormat('dd/MM/yyyy  HH:mm:ss'),
+                    date: luxon.DateTime.now().toFormat('dd/MM/yyyy HH:mm:ss'),
                     message: (message),
                     status: 'received',
                 })

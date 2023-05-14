@@ -71,7 +71,7 @@
                                 <div class="info_chat ms-3">
                                     <p class="name pt-1 chat_hiden"> {{ contact.name }} </p>
                                     <p class="last_message fw-lighter chat_hiden"> {{ getLastMessage (i) }} </p>
-                                    <p class="hour"> 12:00 </p>
+                                    <p class="hour"> {{ getLastAccess(i).split(' ')[1].slice(0, -3) }} </p>
                                 </div>
                             </div>
                         </div>
