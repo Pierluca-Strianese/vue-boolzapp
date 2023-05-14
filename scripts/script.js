@@ -3,6 +3,8 @@ const app = Vue.createApp({
         return {
             newText: '',
             currentIndex: 0,
+            filterContacts: [],
+            filterText: '',
             contacts: [
                 {
                     name: 'Michele',
@@ -179,7 +181,7 @@ const app = Vue.createApp({
             let cleanedText = this.newText.trim();
             if (cleanedText != ''){
                 this.contacts[this.currentIndex].messages.push({
-                    date: '',
+                    date: '10/01/2020 15:51:00',
                     message: (cleanedText),
                     status: 'sent'
                 });
@@ -189,13 +191,23 @@ const app = Vue.createApp({
         },
 
         autoReply: function() {
+            let message = this.contacts[this.currentIndex].name + '... sono tuo padre!'
             setTimeout(() => {
                 this.contacts[this.currentIndex].messages.push({
-                    date: '',
-                    message: 'ok!',
+                    date: '10/01/2020 15:51:00',
+                    message: (message),
                     status: 'received',
                 })
             }, 1000);
+        },
+
+        extractTimeFromdate(date) {
+            return date.split(' ')[1].slice(0, -3);
+        },
+
+        getLastAccess: function(i) {  
+            let lastMex= this.contacts[i].messages.length - 1;
+            return this.contacts[i].messages[lastMex].date;
         },
         
     },

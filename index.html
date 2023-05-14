@@ -15,19 +15,21 @@
 
     <!-- link CSS -->
     <link rel="stylesheet" href="assets/style.css">
+
+    <style> [v-cloak] {display: none;} </style>
 </head>
 <body>
 
     <body>
         <div class="background">
-            <div class="container_box" id="root">
+            <div class="container_box" id="root" v-cloak>
 
 <!-- MAIN SECTION MENU CHAT -->
 
                 <div class="menu_chat">
 <!-- MY USER CHAT -->
                     <div class="myuser_bar ps-3 pe-3">
-                        <img src="img/avatar_io.jpg" alt="" class="me-2 chat_hiden">
+                        <img src="img/avatar_io.jpg" alt="" class="me-2">
                         <span class="name"> Pierluca</span>
                         <div>
                             <i class="fa-solid fa-circle-notch p-2"></i>
@@ -47,7 +49,8 @@
                     <div class="search p-2">
                         <div class="input_group p-1">
                             <i class="fa fa-search icon p-1" aria-hidden="true"></i>
-                            <input type="text" class="input_search"  placeholder="Cerca o inizia una nuova chat">
+                            <input type="text" class="input_search"  placeholder="Cerca o inizia una nuova chat"
+                            v-model="filterText">
                         </div>
                     </div>
 <!-- CHAT LIST -->
@@ -79,7 +82,7 @@
                             <img :src="contacts[currentIndex].avatar" alt="" class="me-3">
                             <span>
                                 <span class="name_chat d-block"> {{contacts[currentIndex].name}} </span>
-                                <span class="last_access d-block fw-lighter"> ultimo accesso: </span>
+                                <span class="last_access d-block fw-lighter"> ultimo accesso: {{ getLastAccess(currentIndex) }}</span>
                             </span>
                         </div>
                         <div>
@@ -96,7 +99,7 @@
                             :class="message.status"
                         > 
                             {{message.message}}
-                            <span class="time_message"> {{ message.date }} </span>
+                            <span class="time_message"> {{ extractTimeFromdate(message.date) }} </span>
                         </div>
                     </div>
 <!-- MESSAGE BOX INPUT -->
