@@ -99,12 +99,18 @@
 <!-- CHAT MESSAGE -->
                     <div class="chat_messages p-4 d-flex">
                         <div 
-                            v-for="message in contacts[currentIndex].messages"
+                            v-for="(message, i) in contacts[currentIndex].messages"
                             class="message sent p-3 m-2 rounded-4"
                             :class="message.status"
-                        > 
-                            {{message.message}}
+                        > {{message.message}}
                             <span class="time_message"> {{ extractTimeFromdate(message.date) }} </span>
+                            <i class="fa-solid fa-caret-down message_menu_icon" @click="openMenu(i)"></i>
+                            <span class="message_menu p-2 rounded-2" v-if="visible === i">
+                                <div class="p-1 rounded-2"> Info messaggio </div>
+                                <div 
+                                    class="p-1 rounded-2" @click="deleteMex(currentIndex)"
+                                > Cancella messaggio </div>
+                            </span>
                         </div>
                     </div>
 <!-- MESSAGE BOX INPUT -->
@@ -124,6 +130,7 @@
         </div>
     </body>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js"></script>
     <script src="scripts/script.js"></script>
 </body>
 </html>

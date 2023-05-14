@@ -54,6 +54,10 @@ p {
     color: #8EDAFD;
 }
 
+.chat_messages .message .message_menu div:hover {
+    background-color: var(--hover_background);
+}
+
 /* section MAIN SECTION & MAIN CLASS */
 
 .background {
@@ -232,4 +236,24 @@ p {
     right: 10px;
     font-size: .6rem;
     color: #c0bebd;
+}
+
+.chat_messages .message .message_menu_icon {
+    position: absolute;
+    top: 4px;
+    right: 15px;
+    /* font-size: .6rem; */
+    color: #c0bebd;
+    cursor: pointer;
+}
+
+.chat_messages .message .message_menu {
+    position: absolute;
+    z-index: 9;
+    top: 20px;
+    right: 19px;
+    background-color: whitesmoke;
+    /* font-size: .6rem; */
+    color: #c0bebd;
+    cursor: pointer;
 }

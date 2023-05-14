@@ -5,6 +5,7 @@ const app = Vue.createApp({
             currentIndex: 0,
             filterContacts: [],
             filterText: '',
+            visible: null,
             contacts: [
                 {
                     name: 'Michele',
@@ -177,11 +178,15 @@ const app = Vue.createApp({
             this.currentIndex = i; 
         },
 
+        getDate() {
+            return dayjs().format('DD/MM/YYYY  HH:mm:ss')
+        },
+
         addNewMessage() {
             let cleanedText = this.newText.trim();
             if (cleanedText != ''){
                 this.contacts[this.currentIndex].messages.push({
-                    date: '10/01/2020 15:51:00',
+                    date: luxon.DateTime.now().toFormat('dd/MM/yyyy  HH:mm:ss'),
                     message: (cleanedText),
                     status: 'sent'
                 });
@@ -194,7 +199,7 @@ const app = Vue.createApp({
             let message = this.contacts[this.currentIndex].name + '... sono tuo padre!'
             setTimeout(() => {
                 this.contacts[this.currentIndex].messages.push({
-                    date: '10/01/2020 15:51:00',
+                    date: luxon.DateTime.now().toFormat('dd/MM/yyyy  HH:mm:ss'),
                     message: (message),
                     status: 'received',
                 })
@@ -214,6 +219,19 @@ const app = Vue.createApp({
             let lastMex= this.contacts[i].messages.length - 1;
             return this.contacts[i].messages[lastMex].message;
         },
+
+        openMenu(i){
+            if(this.visible === i){
+                this.visible = false;
+            } else {
+                this.visible = i;
+            }
+        },
+
+        deleteMex(i){
+            this.contacts[i].messages.splice(this.visible, 1)
+            this.visible = null;
+        }
         
     },
 });
