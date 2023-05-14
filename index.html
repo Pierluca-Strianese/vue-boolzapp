@@ -49,27 +49,32 @@
                     <div class="search p-2">
                         <div class="input_group p-1">
                             <i class="fa fa-search icon p-1" aria-hidden="true"></i>
-                            <input type="text" class="input_search"  placeholder="Cerca o inizia una nuova chat"
-                            v-model="filterText">
+                            <input 
+                                type="text" 
+                                class="input_search"  
+                                placeholder="Cerca o inizia una nuova chat"
+                                v-model="filterText"
+                            >
                         </div>
                     </div>
 <!-- CHAT LIST -->
                     <div class="chats_list bg-white">
 <!-- CHAT ITEM -->
-                        <div
-                            v-for="(contact,i) in contacts"
-                            class="chat_item ps-2 border-bottom"
-                            @click="setCurrentContact(i)"
-                            :class="{active: i == currentIndex}"
-                        >
-                            <img :src= "contact.avatar" :alt="contact.name">
-                            <div class="info_chat ms-3">
-                                <p class="name pt-1 chat_hiden"> {{ contact.name }} </p>
-                                <p class="last_message fw-lighter chat_hiden"> </p>
-                                <p class="hour"> 12:00 </p>
+                        <div v-for="(contact,i) in contacts">
+                            <div
+                                v-if="contact.name.toLowerCase().includes(filterText)"
+                                class="chat_item ps-2 border-bottom"
+                                @click="setCurrentContact(i)"
+                                :class="{active: i == currentIndex}"
+                            >
+                                <img :src= "contact.avatar" :alt="contact.name">
+                                <div class="info_chat ms-3">
+                                    <p class="name pt-1 chat_hiden"> {{ contact.name }} </p>
+                                    <p class="last_message fw-lighter chat_hiden"> {{ getLastMessage (i) }} </p>
+                                    <p class="hour"> 12:00 </p>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 

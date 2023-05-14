@@ -209,6 +209,11 @@ const app = Vue.createApp({
             let lastMex= this.contacts[i].messages.length - 1;
             return this.contacts[i].messages[lastMex].date;
         },
+
+        getLastMessage: function(i) {  
+            let lastMex= this.contacts[i].messages.length - 1;
+            return this.contacts[i].messages[lastMex].message;
+        },
         
     },
 });
