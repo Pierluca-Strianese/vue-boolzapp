@@ -64,7 +64,7 @@
 <!-- CHAT ITEM -->
                         <div v-for="(contact,i) in contacts">
                             <div
-                                v-if="contact.name.toLowerCase().includes(filterText)"
+                                v-if="contact.name.toLowerCase().includes(filterText) "
                                 class="chat_item p-2 ps-2 border-bottom"
                                 @click="setCurrentContact(i)"
                                 :class="{active: i == currentIndex}"
@@ -102,7 +102,7 @@
                     <div class="chat_messages p-4 d-flex">
                         <div 
                             v-for="(message, i) in contacts[currentIndex].messages"
-                            class="message sent p-3 m-2 rounded-4"
+                            class="message sent p-2 m-2 rounded-3"
                             :class="message.status"
                         > <span class="p-1"> {{message.message}} </span>
                             <span class="time_message"> {{ extractTimeFromdate(message.date) }} </span>

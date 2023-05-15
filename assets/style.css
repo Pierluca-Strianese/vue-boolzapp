@@ -250,6 +250,11 @@ p {
     /* font-size: .6rem; */
     color: #c0bebd;
     cursor: pointer;
+    opacity: 40%;
+}
+
+.chat_messages .message .message_menu_icon:hover {
+    opacity: 100%;
 }
 
 .chat_messages .message .message_menu {
