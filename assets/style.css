@@ -39,7 +39,7 @@ p {
 /* HOVER */
 
 .chat_item:hover {
-    background-color: var(--hover_background);
+    background-color: #f1f1f1;
     cursor: pointer;
 }
 
@@ -101,6 +101,7 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex: 0 0 auto;
     background-color: #EAEAEA;
     height: var(--height_myuser_bar);
 }
@@ -143,7 +144,6 @@ p {
 /* section CHAT LIST & ITEMS */
 
 .chats_list {
-    height: 100%;
     overflow: auto;
 }
 
