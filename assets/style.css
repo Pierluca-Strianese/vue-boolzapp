@@ -73,11 +73,15 @@ p {
     display: flex;
     width: 75vw;
     height: 90vh;
+    box-shadow: 0 0 30px 2px rgba(111, 143, 135, 0.5);
 }
 
 .menu_chat {
+    display: flex;
+    flex-direction: column;
     height: 100%;
     width: 25%;
+    border-right: 1px solid rgb(180, 180, 180);
 }
 
 .chat {
@@ -139,7 +143,8 @@ p {
 /* section CHAT LIST & ITEMS */
 
 .chats_list {
-    overflow: scroll;
+    height: 100%;
+    overflow: auto;
 }
 
 .chats_list .chat_item {
@@ -210,7 +215,7 @@ p {
 .chat .chat_messages {
     background-image: url("../img/mine.jpg");
     height: calc(90vh - (var(--height_message_bar) + var(--height_myuser_bar)));
-    overflow: scroll;
+    overflow: auto;
     flex-direction: column;
 }
 
@@ -240,7 +245,7 @@ p {
 
 .chat_messages .message .message_menu_icon {
     position: absolute;
-    top: 4px;
+    top: 2px;
     right: 15px;
     /* font-size: .6rem; */
     color: #c0bebd;
@@ -254,6 +259,6 @@ p {
     right: 19px;
     background-color: whitesmoke;
     /* font-size: .6rem; */
-    color: #c0bebd;
+    color: rgb(100, 100, 100);
     cursor: pointer;
 }

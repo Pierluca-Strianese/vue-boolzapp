@@ -29,7 +29,7 @@
                 <div class="menu_chat">
 <!-- MY USER CHAT -->
                     <div class="myuser_bar ps-3 pe-3">
-                        <img src="img/avatar_io.jpg" alt="" class="me-2">
+                        <img src="img/avatar_io.jpg" alt="" class="me-1">
                         <span class="name"> Pierluca</span>
                         <div>
                             <i class="fa-solid fa-circle-notch p-2"></i>
@@ -39,10 +39,10 @@
                     </div>
 <!-- ALLERT NOTIFICHE -->
                     <div class="allert_notifiche">
-                        <i class="fa-regular fa-bell-slash ms-3 me-2 rounded-circle"></i>
+                        <i class="fa-regular fa-bell-slash ms-2 me-2 rounded-circle"></i>
                         <span> 
-                            <span class="d-block fs-6 chat_hiden"> Ricevi le notifiche di nuovi messaggi </span>
-                            <a href="#" class="d-block fw-lighter text-decoration-underline chat_hiden"> Attiva notifiche desktop </a>
+                            <span class="d-block fs-6"> Ricevi le notifiche di nuovi messaggi </span>
+                            <span class="d-block fw-lighter text-decoration-underline "> Attiva notifiche desktop </span>
                         </span>
                     </div>
 <!-- BAR SEARCH CHAT -->
@@ -63,7 +63,7 @@
                         <div v-for="(contact,i) in contacts">
                             <div
                                 v-if="contact.name.toLowerCase().includes(filterText)"
-                                class="chat_item ps-2 border-bottom"
+                                class="chat_item p-2 ps-2 border-bottom"
                                 @click="setCurrentContact(i)"
                                 :class="{active: i == currentIndex}"
                             >
@@ -102,7 +102,7 @@
                             v-for="(message, i) in contacts[currentIndex].messages"
                             class="message sent p-3 m-2 rounded-4"
                             :class="message.status"
-                        > {{message.message}}
+                        > <span class="p-1"> {{message.message}} </span>
                             <span class="time_message"> {{ extractTimeFromdate(message.date) }} </span>
                             <i class="fa-solid fa-caret-down message_menu_icon" @click="openMenu(i)"></i>
                             <span class="message_menu p-2 rounded-2" v-if="visible === i">

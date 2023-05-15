@@ -6,6 +6,7 @@ const app = Vue.createApp({
             filterContacts: [],
             filterText: '',
             visible: null,
+            notificationActive: false,
             contacts: [
                 {
                     name: 'Michele',
@@ -231,7 +232,7 @@ const app = Vue.createApp({
         deleteMex(i){
             this.contacts[i].messages.splice(this.visible, 1)
             this.visible = null;
-        }
+        },
         
     },
 });
