@@ -1,12 +1,17 @@
 const app = Vue.createApp({
-    data(){
+    data() {
         return {
             newText: '',
             currentIndex: 0,
-            filterContacts: [],
             filterText: '',
+            filterMessage: '',
             visible: null,
-            notificationActive: false,
+            visible_chat: 0,
+            notify: true,
+            answer: [
+                'Non sono convinto', 'Sei forte', 'Che ne so?', 'Si ma stai calmo!', 'Brindo alla tua!',
+                'Ma chi sei?', 'Buongiorno', 'Raccontami', ':)'
+            ],
             contacts: [
                 {
                     name: 'Michele',
@@ -170,13 +175,13 @@ const app = Vue.createApp({
                     ],
                 }
             ]
-            
+
         };
     },
 
     methods: {
         setCurrentContact(i) {
-            this.currentIndex = i; 
+            this.currentIndex = i;
         },
 
         getDate() {
@@ -185,7 +190,7 @@ const app = Vue.createApp({
 
         addNewMessage() {
             let cleanedText = this.newText.trim();
-            if (cleanedText != ''){
+            if (cleanedText != '') {
                 this.contacts[this.currentIndex].messages.push({
                     date: luxon.DateTime.now().toFormat('dd/MM/yyyy HH:mm:ss'),
                     message: (cleanedText),
@@ -196,12 +201,12 @@ const app = Vue.createApp({
             this.autoReply();
         },
 
-        autoReply: function() {
-            let message = this.contacts[this.currentIndex].name + '... sono tuo padre!'
+        autoReply: function () {
+            let rand = Math.floor(Math.random() * this.answer.length);
             setTimeout(() => {
                 this.contacts[this.currentIndex].messages.push({
                     date: luxon.DateTime.now().toFormat('dd/MM/yyyy HH:mm:ss'),
-                    message: (message),
+                    message: this.answer[rand],
                     status: 'received',
                 })
             }, 1000);
@@ -211,29 +216,62 @@ const app = Vue.createApp({
             return date.split(' ')[1].slice(0, -3);
         },
 
-        getLastAccess: function(i) {  
-            let lastMex= this.contacts[i].messages.length - 1;
+        getLastAccess: function (i) {
+            let lastMex = this.contacts[i].messages.length - 1;
             return this.contacts[i].messages[lastMex].date;
         },
 
-        getLastMessage: function(i) {  
-            let lastMex= this.contacts[i].messages.length - 1;
+        getLastMessage: function (i) {
+            let lastMex = this.contacts[i].messages.length - 1;
             return this.contacts[i].messages[lastMex].message;
         },
 
-        openMenu(i){
-            if(this.visible === i){
+        openMenu(i) {
+            if (this.visible === i) {
                 this.visible = false;
             } else {
                 this.visible = i;
             }
         },
 
-        deleteMex(i){
+        openMenuChat() {
+            if (this.visible_chat === 0) {
+                this.visible_chat = 1;
+            } else {
+                this.visible_chat = 0;
+            }
+        },
+
+        filterContacts() {
+            const filteredArray = [];
+            return filteredArray;
+        },
+
+        filterMessages() {
+            const filteredMessageArray = [];
+            return filteredMessageArray;
+        },
+
+        deleteMex(i) {
             this.contacts[i].messages.splice(this.visible, 1)
             this.visible = null;
         },
-        
+
+        notifyOnOff: function () {
+            this.notify = !this.notify
+        },
+
+    },
+
+    computed: {
+        filteredContacts() {
+            return this.contacts.filter(contact => contact.name.includes(this.filterText));
+        },
+
+        filteredMessages() {
+            return this.contacts.messages.filter(message => messages.message.includes(this.filterMessage));
+        },
+
     },
 });
 
