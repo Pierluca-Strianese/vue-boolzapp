@@ -1,21 +1,51 @@
 const app = Vue.createApp({
+    el: '#app',
     data() {
         return {
             newText: '',
             currentIndex: 0,
             filterText: '',
             filterMessage: '',
+            filteredMessages: [],
             visible: null,
             visible_chat: 0,
+            visible_attachments: 0,
             notify: true,
             answer: [
-                'Non sono convinto', 'Sei forte', 'Che ne so?', 'Si ma stai calmo!', 'Brindo alla tua!',
-                'Ma chi sei?', 'Buongiorno', 'Raccontami', ':)'
+                'Non sono convinto',
+                'Sei forte',
+                'Che ne so?',
+                'Si ma stai calmo!',
+                'Brindo alla tua!',
+                'Ma chi sei?',
+                'Buongiorno',
+                'Raccontami',
+                'Mi piace questa idea!',
+                'Non sono sicuro di capire.',
+                'Non so cosa dire...',
+                'Ehi, come stai?',
+                'Mi fai ridere!',
+                'Dimmi di più!',
+                'Interessante...',
+                'Davvero?',
+                'Non posso crederci!',
+                'Oh, grazie!',
+                'Cosa intendi?',
+                'Mi dispiace sentirlo.',
+                'Beh, che dire...',
+                'Fammi pensare...',
+                'Ecco un pensiero...',
+                'Mi sto divertendo!',
+                'Raccontami di più su di te.',
+                'Ti capisco.',
+                'Ho bisogno di più dettagli.',
+                'Che bella giornata!',
+                ':)'
             ],
             contacts: [
                 {
-                    name: 'Michele',
-                    avatar: './img/avatar_1.jpg',
+                    name: 'Camilla',
+                    avatar: './img/avatar_io.jpg',
                     visible: true,
                     messages: [
                         {
@@ -32,7 +62,27 @@ const app = Vue.createApp({
                             date: '10/01/2020 16:15:22',
                             message: 'Tutto fatto!',
                             status: 'received'
-                        }
+                        },
+                        {
+                            date: '12/02/2020 08:45:30',
+                            message: 'Ciao, hai ancora bisogno di aiuto per il progetto?',
+                            status: 'sent'
+                        },
+                        {
+                            date: '12/02/2020 09:00:15',
+                            message: 'Sì, sarebbe fantastico se potessi darmi una mano.',
+                            status: 'received'
+                        },
+                        {
+                            date: '12/02/2020 09:15:40',
+                            message: 'Nessun problema, possiamo incontrarci oggi pomeriggio?',
+                            status: 'sent'
+                        },
+                        {
+                            date: '12/02/2020 09:30:20',
+                            message: 'Va bene, ci vediamo alle 15:00.',
+                            status: 'received'
+                        },
                     ],
                 },
                 {
@@ -54,7 +104,12 @@ const app = Vue.createApp({
                             date: '20/03/2020 16:35:00',
                             message: 'Mi piacerebbe ma devo andare a fare la spesa.',
                             status: 'sent'
-                        }
+                        },
+                        {
+                            date: '20/03/2020 16:40:25',
+                            message: 'Nessun problema, forse un altro giorno.',
+                            status: 'received'
+                        },
                     ],
                 },
                 {
@@ -76,7 +131,22 @@ const app = Vue.createApp({
                             date: '28/03/2020 16:15:22',
                             message: 'Ah scusa!',
                             status: 'received'
-                        }
+                        },
+                        {
+                            date: '28/03/2020 16:25:45',
+                            message: 'Nessun problema, era divertente!',
+                            status: 'sent'
+                        },
+                        {
+                            date: '29/03/2020 09:30:00',
+                            message: 'Hai voglia di uscire oggi?',
+                            status: 'sent'
+                        },
+                        {
+                            date: '29/03/2020 09:45:00',
+                            message: 'Mi dispiace, sono impegnato oggi.',
+                            status: 'received'
+                        },
                     ],
                 },
                 {
@@ -93,7 +163,17 @@ const app = Vue.createApp({
                             date: '10/01/2020 15:50:00',
                             message: 'Si, ma preferirei andare al cinema',
                             status: 'received'
-                        }
+                        },
+                        {
+                            date: '11/01/2020 14:20:00',
+                            message: 'Andiamo al cinema stasera?',
+                            status: 'sent'
+                        },
+                        {
+                            date: '11/01/2020 14:35:00',
+                            message: 'Mi dispiace, ho altri piani stasera.',
+                            status: 'received'
+                        },
                     ],
                 },
                 {
@@ -110,7 +190,17 @@ const app = Vue.createApp({
                             date: '10/01/2020 15:50:00',
                             message: 'Va bene, stasera la sento',
                             status: 'received'
-                        }
+                        },
+                        {
+                            date: '11/01/2020 10:00:00',
+                            message: 'Hai comprato il biglietto per il concerto?',
+                            status: 'sent'
+                        },
+                        {
+                            date: '11/01/2020 10:15:00',
+                            message: 'Sì, ho il biglietto. Non vedo l ora!',
+                            status: 'received'
+                        },
                     ],
                 },
                 {
@@ -132,7 +222,17 @@ const app = Vue.createApp({
                             date: '10/01/2020 15:51:00',
                             message: 'Nessuna nuova, buona nuova',
                             status: 'sent'
-                        }
+                        },
+                        {
+                            date: '12/01/2020 11:30:00',
+                            message: 'Andiamo a fare shopping questo weekend?',
+                            status: 'sent'
+                        },
+                        {
+                            date: '12/01/2020 11:45:00',
+                            message: 'Mi dispiace, sono fuori città questo weekend.',
+                            status: 'received'
+                        },
                     ],
                 },
                 {
@@ -149,7 +249,17 @@ const app = Vue.createApp({
                             date: '10/01/2020 15:50:00',
                             message: 'Grazie per avermelo ricordato, le scrivo subito!',
                             status: 'received'
-                        }
+                        },
+                        {
+                            date: '12/01/2020 09:00:00',
+                            message: 'Martina ha organizzato una festa a sorpresa. Vuoi unirti?',
+                            status: 'sent'
+                        },
+                        {
+                            date: '12/01/2020 09:15:00',
+                            message: 'Sì, sono dentro! Dov è la festa?',
+                            status: 'received'
+                        },
                     ],
                 },
                 {
@@ -164,16 +274,26 @@ const app = Vue.createApp({
                         },
                         {
                             date: '10/01/2020 15:50:00',
-                            message: 'No, l\'ho già mangiata ieri, ordiniamo sushi!',
+                            message: 'No, l ho già mangiata ieri, ordiniamo sushi!',
                             status: 'sent'
                         },
                         {
                             date: '10/01/2020 15:51:00',
                             message: 'OK!!',
                             status: 'received'
-                        }
+                        },
+                        {
+                            date: '12/01/2020 20:00:00',
+                            message: 'Hai visto il nuovo film al cinema? Dicono sia fantastico!',
+                            status: 'sent'
+                        },
+                        {
+                            date: '12/01/2020 20:15:00',
+                            message: 'Non ancora, andiamo a vederlo questo weekend?',
+                            status: 'received'
+                        },
                     ],
-                }
+                },
             ]
 
         };
@@ -199,6 +319,8 @@ const app = Vue.createApp({
                 this.newText = '';
             }
             this.autoReply();
+            this.scrollToEnd();
+            this.scrollToEnd_2();
         },
 
         autoReply: function () {
@@ -209,7 +331,8 @@ const app = Vue.createApp({
                     message: this.answer[rand],
                     status: 'received',
                 })
-            }, 1000);
+            },
+                1000);
         },
 
         extractTimeFromdate(date) {
@@ -242,14 +365,12 @@ const app = Vue.createApp({
             }
         },
 
-        filterContacts() {
-            const filteredArray = [];
-            return filteredArray;
-        },
-
-        filterMessages() {
-            const filteredMessageArray = [];
-            return filteredMessageArray;
+        openMenuAttachments() {
+            if (this.visible_attachments === 0) {
+                this.visible_attachments = 1;
+            } else {
+                this.visible_attachments = 0;
+            }
         },
 
         deleteMex(i) {
@@ -261,17 +382,44 @@ const app = Vue.createApp({
             this.notify = !this.notify
         },
 
+        filterMessages() {
+            const filteredContacts = this.contacts[this.currentIndex];
+            if (!filteredContacts) return;
+
+            const filterText = this.filterMessage.toLowerCase().trim();
+
+            this.filteredMessages = filteredContacts.messages.filter(message =>
+                message.message.toLowerCase().includes(filterText)
+            );
+        },
+
+        scrollToEnd: function () {
+            setTimeout(() => {
+                let container = this.$refs.chatMessages;
+                if (container) {
+                    container.scrollTo(0, container.scrollHeight);
+                }
+            }, 100);
+        },
+
+        scrollToEnd_2: function () {
+            setTimeout(() => {
+                let container = this.$refs.chatMessages;
+                if (container) {
+                    container.scrollTo(0, container.scrollHeight);
+                }
+            }, 1100);
+        },
     },
 
     computed: {
         filteredContacts() {
             return this.contacts.filter(contact => contact.name.includes(this.filterText));
         },
+    },
 
-        filteredMessages() {
-            return this.contacts.messages.filter(message => messages.message.includes(this.filterMessage));
-        },
-
+    watch: {
+        filterMessage: 'filterMessages',
     },
 });
 

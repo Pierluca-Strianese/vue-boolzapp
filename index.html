@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boolezapp</title>
+    <link rel="icon" type="image/x-icon" href="img/icon.webp">
 
     <!-- bootstrap -->
 
@@ -28,139 +29,158 @@
 </head>
 
 <body>
+    <div class="background">
+        <div class="container_box" id="root" v-cloak>
 
-    <body>
-        <div class="background">
-            <div class="container_box" id="root" v-cloak>
+            <!-- MAIN SECTION MENU CHAT -->
 
-                <!-- MAIN SECTION MENU CHAT -->
-
-                <div class="menu_chat">
-                    <!-- MY USER CHAT -->
-                    <div class="myuser_bar ps-3 pe-3">
-                        <div class="d-flex justify-content-center align-items-center">
-                            <img src="img/avatar_io.jpg" alt="" class="me-2">
-                            <span class="name"> Pierluca</span>
+            <div class="menu_chat">
+                <!-- MY USER CHAT -->
+                <div class="myuser_bar ps-3 pe-3">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img src="img/avatar_1.jpg" alt="" class="me-2">
+                        <span class="name"> Pierluca</span>
+                    </div>
+                    <div class="d-flex">
+                        <i class="fa-solid fa-circle-notch p-2"></i>
+                        <i class="fa-solid fa-message p-2"></i>
+                        <i class="fa-solid fa-ellipsis-vertical p-2"></i>
+                    </div>
+                </div>
+                <!-- ALLERT NOTIFICHE -->
+                <div class="allert_notifiche py-3">
+                    <div class="notify-icon rounded-circle ms-1" :class="notify ? 'notify-icon-off' : 'notify-icon-on'"
+                        @click="notifyOnOff()"></div>
+                    <span class="ms-3">
+                        <div v-if="notify">
+                            <span class="d-block fs-6"><strong>Ricevi</strong> le notifiche di nuovi messaggi
+                            </span>
+                            <a class="link d-block fw-lighter" href="#" @click="notifyOnOff()">Attiva notifiche
+                                desktop</a>
                         </div>
-                        <div class="d-flex">
-                            <i class="fa-solid fa-circle-notch p-2"></i>
-                            <i class="fa-solid fa-message p-2"></i>
-                            <i class="fa-solid fa-ellipsis-vertical p-2"></i>
+                        <div v-if="!notify">
+                            <span class="d-block fs-6"><strong>Disattiva</strong> notifiche di nuovi messaggi</span>
+                            <a class="link small-text-size" href="#" @click="notifyOnOff()">Disattiva notifiche
+                                desktop</a>
+                        </div>
+
+                        </a>
+                    </span>
+                </div>
+                <!-- BAR SEARCH CHAT -->
+                <div class="search p-2">
+                    <div class="input_group p-1">
+                        <i class="fa fa-search icon p-1" aria-hidden="true"></i>
+                        <input type="text" class="input_search" placeholder="Cerca o inizia una nuova chat"
+                            v-model="filterText">
+                    </div>
+                </div>
+                <!-- CHAT LIST -->
+                <div class="chats_list bg-white">
+                    <!-- CHAT ITEM -->
+                    <div v-for="(contact,i) in contacts">
+                        <div v-if="contact.name.toLowerCase().includes(filterText)"
+                            class="chat_item p-2 ps-2 border-bottom" @click="setCurrentContact(i)"
+                            :class="{active: i == currentIndex}">
+                            <img :src="contact.avatar" :alt="contact.name">
+                            <div class="info_chat ms-3">
+                                <p class="name pt-1 chat_hiden"> {{ contact.name }} </p>
+                                <p class="last_message fw-lighter chat_hiden"> {{ getLastMessage (i) }} </p>
+                                <p class="hour"> {{ getLastAccess(i).split(' ')[1].slice(0, -3) }} </p>
+                            </div>
                         </div>
                     </div>
-                    <!-- ALLERT NOTIFICHE -->
-                    <div class="allert_notifiche">
-                        <div class="notify-icon rounded-circle me-3"
-                            :class="notify ? 'notify-icon-off' : 'notify-icon-on'" @click="notifyOnOff()"></div>
-                        <span>
-                            <div v-if="notify">
-                                <span class="d-block fs-6"><strong>Ricevi</strong> le notifiche di nuovi messaggi
-                                </span>
-                                <a class="link d-block fw-lighter" href="#" @click="notifyOnOff()">Attiva notifiche
-                                    desktop</a>
-                            </div>
-                            <div v-if="!notify">
-                                <span class="d-block fs-6"><strong>Disattiva</strong> notifiche di nuovi messaggi</span>
-                                <a class="link small-text-size" href="#" @click="notifyOnOff()">Disattiva notifiche
-                                    desktop</a>
-                            </div>
+                </div>
+            </div>
 
-                            </a>
+            <!-- MAIN SECTION CHAT -->
+
+            <div class="chat">
+                <!-- CHAT BAR TOP -->
+                <div class="chat_bar ps-3 pe-3 border-start">
+                    <div class="d-flex">
+                        <img :src="contacts[currentIndex].avatar" alt="" class="me-3">
+                        <span>
+                            <span class="name_chat d-block"> {{contacts[currentIndex].name}} </span>
+                            <span class="last_access d-block fw-lighter"> ultimo accesso: {{
+                                getLastAccess(currentIndex) }}</span>
                         </span>
                     </div>
-                    <!-- BAR SEARCH CHAT -->
-                    <div class="search p-2">
-                        <div class="input_group p-1">
-                            <i class="fa fa-search icon p-1" aria-hidden="true"></i>
-                            <input type="text" class="input_search" placeholder="Cerca o inizia una nuova chat"
-                                v-model="filterText">
-                        </div>
+                    <div class=" d-flex">
+                        <i class="fa-solid fa-magnifying-glass p-2" @click="openMenuChat"></i>
+                        <i class="fa-solid fa-ellipsis-vertical p-2"></i>
                     </div>
-                    <!-- CHAT LIST -->
-                    <div class="chats_list bg-white">
-                        <!-- CHAT ITEM -->
-                        <div v-for="(contact,i) in contacts">
-                            <div v-if="contact.name.toLowerCase().includes(filterText)"
-                                class="chat_item p-2 ps-2 border-bottom" @click="setCurrentContact(i)"
-                                :class="{active: i == currentIndex}">
-                                <img :src="contact.avatar" :alt="contact.name">
-                                <div class="info_chat ms-3">
-                                    <p class="name pt-1 chat_hiden"> {{ contact.name }} </p>
-                                    <p class="last_message fw-lighter chat_hiden"> {{ getLastMessage (i) }} </p>
-                                    <p class="hour"> {{ getLastAccess(i).split(' ')[1].slice(0, -3) }} </p>
-                                </div>
+                </div>
+                <!-- CHAT MESSAGE -->
+                <div class="chat_messages overflow-auto p-4 d-flex" ref="chatMessages">
+                    <div v-for="(message, i) in contacts[currentIndex].messages" class="message mx-3"
+                        :class="message.status">
+                        <div v-if="message.status === 'sent'" id="triangle"></div>
+                        <div v-else id="triangle_2"></div>
+                        <div class="pe-3">{{message.message}}
+                        </div>
+                        <span class="time_message"> {{ extractTimeFromdate(message.date) }} <i
+                                class="fa-solid fa-check-double text-primary" v-if="message.status === 'sent'"></i>
+                        </span>
+                        <i class="fa-solid fa-caret-down message_menu_icon" @click="openMenu(i)"></i>
+                        <span class="message_menu p-2 rounded-2" v-if="visible === i">
+                            <div class="p-1 rounded-2"> Info messaggio </div>
+                            <div class="p-1 rounded-2" v-if="message.status === 'sent'"
+                                @click="deleteMex(currentIndex)"> Cancella messaggio
                             </div>
-                        </div>
+                        </span>
                     </div>
                 </div>
-
-                <!-- MAIN SECTION CHAT -->
-
-                <div class="chat">
-                    <!-- CHAT BAR TOP -->
-                    <div class="chat_bar ps-3 pe-3 border-start">
-                        <div class="d-flex">
-                            <img :src="contacts[currentIndex].avatar" alt="" class="me-3">
-                            <span>
-                                <span class="name_chat d-block"> {{contacts[currentIndex].name}} </span>
-                                <span class="last_access d-block fw-lighter"> ultimo accesso: {{
-                                    getLastAccess(currentIndex) }}</span>
-                            </span>
-                        </div>
-                        <div class=" d-flex">
-                            <i class="fa-solid fa-magnifying-glass p-2" @click="openMenuChat"></i>
-                            <i class="fa-solid fa-paperclip p-2"></i>
-                            <i class="fa-solid fa-ellipsis-vertical p-2"></i>
-                        </div>
+                <!-- MESSAGE BOX INPUT -->
+                <div class="message_box">
+                    <i class="fa-solid fa-plus m-4" @click="openMenuAttachments"> </i>
+                    <div class="attachments" v-if="visible_attachments === 1">
+                        <div> <i class="fa-regular fa-file-lines pe-2"></i> Document</div>
+                        <div> <i class="fa-solid fa-photo-film pe-2 text-primary"></i>Photos & Videos</div>
+                        <div> <i class="fa-solid fa-camera pe-2 text-danger"></i>Camera</div>
+                        <div> <i class="fa-solid fa-user pe-2 text-info"></i>Contact</div>
+                        <div> <i class="fa-solid fa-square-poll-horizontal pe-2 text-warning"></i>Poll</div>
+                        <div> <i class="fa-solid fa-note-sticky pe-2 text-success"></i>New Stiker</div>
                     </div>
-                    <!-- CHAT MESSAGE -->
-                    <div class="chat_messages p-4 d-flex">
-                        <div v-for="(message, i) in contacts[currentIndex].messages" class="message"
-                            :class="message.status">
-                            <span>{{message.message}}
-                            </span>
-                            <span class="time_message"> {{ extractTimeFromdate(message.date) }} </span>
-                            <i class="fa-solid fa-caret-down message_menu_icon" @click="openMenu(i)"></i>
-                            <span class="message_menu p-2 rounded-2" v-if="visible === i">
-                                <div class="p-1 rounded-2"> Info messaggio </div>
-                                <div class="p-1 rounded-2" @click="deleteMex(currentIndex)"> Cancella messaggio
-                                </div>
-                            </span>
-                        </div>
-                    </div>
-                    <!-- MESSAGE BOX INPUT -->
-                    <div class="message_box">
-                        <i class="fa-regular fa-face-smile m-4"></i>
-                        <input type="text" placeholder="Scrivi un messaggio" class="input_text p-1 ps-3"
-                            @keyup.enter="addNewMessage()" v-model="newText">
-                        <i class="fa-solid fa-microphone m-4"></i>
-                    </div>
-
-
+                    <input type="text" placeholder="Scrivi un messaggio" class="input_text p-1 ps-3"
+                        @keyup.enter="addNewMessage()" v-model="newText">
+                    <i class="fa-solid fa-microphone m-4"></i>
                 </div>
-                <div class="search_message" v-if="visible_chat === 1">
-                    <div class="chat_bar ps-3 pe-3 border-start">
-                        <i class="fa-solid fa-xmark me-3" @click="openMenuChat"></i>
-                        <span> Cerca il messaggio </span>
-                    </div>
-                    <div class="shadow-sm py-1 px-2 mb-2">
-                        <input type="text" class="input_search_message p-1" placeholder="Cerca messaggio"
-                            v-model="filterMessage">
-                    </div>
-                    <div v-for="(message, i) in contacts[currentIndex].messages" class="p-2" :class="message.status">
-                        <div v-if="message.message.toLowerCase().includes(filterMessage)">
-                            <div class="message_data"> {{ message.date }} </div>
-                            <span>{{message.message}}</span>
-                        </div>
-                    </div>
-                    <div class="text-center fw-lighter font_size_7 mt-2"> Cerca tra i messaggi di
-                        {{contacts[currentIndex].name}}</div>
-                </div>
+
 
             </div>
+            <div class="search_message" v-if="visible_chat === 1">
+                <div class="chat_bar ps-3 pe-3 border-start">
+                    <i class="fa-solid fa-xmark me-3" @click="openMenuChat"></i>
+                    <span> Cerca il messaggio </span>
+                </div>
+                <div class="shadow-sm py-1 px-2 mb-2">
+                    <input type="text" class="input_search_message p-1" placeholder="Cerca messaggio"
+                        v-model="filterMessage">
+                </div>
+                <div v-if="filterMessage !== ''">
+                    <div v-for="(message, i) in filteredMessages" class="py-2 px-3 border-bottom" :key="message.date">
+
+                        <div class="message_data">
+                            {{message.date }}
+                        </div>
+                        <span>
+                            <i class="fa-solid fa-check-double text-primary font_size_7"
+                                v-if="message.status === 'sent'"></i>
+                            {{message.message}}
+                        </span>
+
+                    </div>
+                </div>
+                <div class="text-center fw-lighter font_size_7 mt-2"> Cerca tra i messaggi di
+                    {{contacts[currentIndex].name}}</div>
+            </div>
+
         </div>
-        </div>
-    </body>
+        <div class="fw-lighter">| © Pierluca Strianese |</div>
+    </div>
+    </div>
+
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js"></script>
     <script src="scripts/script.js"></script>

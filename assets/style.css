@@ -3,7 +3,7 @@
     --height_allert_notifiche: 90px;
     --height_search_chat: 50px;
     --height_message_bar: 60px;
-    --hover_background: #cccccc;
+    --hover_background: #ececec;
     --color_icon: #74869A;
     --bg_sent: #D5F9BA;
     --bg_received: white;
@@ -47,6 +47,11 @@ p {
     font-size: .7rem;
 }
 
+ul {
+    list-style: none;
+}
+
+
 /* HOVER */
 
 .chat_item:hover {
@@ -55,9 +60,11 @@ p {
 }
 
 .chat_bar i:hover,
-.myuser_bar i:hover {
+.myuser_bar i:hover,
+.message_box i:hover {
     color: #009689;
     background-color: var(--hover_background);
+    cursor: pointer;
 }
 
 .menu_chat .allert_notifiche i {
@@ -101,13 +108,14 @@ p {
     display: flex;
     flex-direction: column;
     height: 100%;
-    min-width: 25%;
+    min-width: 27%;
+    max-width: 27%;
     border-right: 1px solid rgb(180, 180, 180);
 }
 
 .chat {
     height: 100%;
-    width: 75%;
+    width: 73%;
 }
 
 .name {
@@ -123,6 +131,30 @@ p {
     width: 49px;
     height: 49px;
     border-radius: 50%;
+}
+
+#triangle {
+    position: absolute;
+    top: -6.65px;
+    right: -15.5px;
+    rotate: 154deg;
+    width: 0;
+    height: 0;
+    border-top: 11px solid transparent;
+    border-right: 22px solid var(--bg_sent);
+    border-bottom: 11px solid transparent;
+}
+
+#triangle_2 {
+    position: absolute;
+    top: -6.65px;
+    left: -16.5px;
+    rotate: 27deg;
+    width: 0;
+    height: 0;
+    border-top: 11px solid transparent;
+    border-right: 22px solid white;
+    border-bottom: 11px solid transparent;
 }
 
 /* section MENU CHAT */
@@ -225,6 +257,9 @@ p {
 /* section NOTIFY*/
 
 .notify-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #9fd8f8;
     background-color: #fff;
     width: 45px;
@@ -250,6 +285,7 @@ p {
 /* section MESSAGE BOX INPUT */
 
 .chat .message_box {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -269,6 +305,31 @@ p {
     border-radius: 5px;
 }
 
+.attachments {
+    position: absolute;
+    bottom: 60px;
+    left: 20px;
+    width: 200px;
+    padding: .5rem 0;
+    background-color: white;
+    font-size: 1rem;
+    border-radius: 20px;
+    box-shadow: 0px 5px 15px grey;
+    overflow: hidden;
+}
+
+.attachments div {
+    padding: .5rem 0;
+    margin: .2rem 0;
+    padding-left: 1rem;
+    font-weight: 100;
+}
+
+.attachments div:hover {
+    background-color: var(--hover_background);
+    cursor: pointer;
+}
+
 /* section CHAT MESSAGES */
 
 .chat_messages {
@@ -280,21 +341,31 @@ p {
 
 .message {
     position: relative;
-    width: 250px;
+    width: fit-content;
+    min-width: 200px;
+    max-width: 400px;
     height: fit-content;
     padding: 1rem 1rem;
     border-radius: 11px;
     margin: .5rem;
+
+}
+
+.message div {
+    display: flex;
+    flex: 1 1 1;
 }
 
 .sent {
     background-color: var(--bg_sent);
     align-self: flex-end;
+    box-shadow: 7px -2px 10px rgb(190, 190, 190);
 }
 
 .received {
     background-color: var(--bg_received);
     align-self: flex-start;
+    box-shadow: -7px -2px 10px rgb(190, 190, 190);
 }
 
 .time_message {
