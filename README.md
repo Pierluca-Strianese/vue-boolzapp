@@ -1,6 +1,6 @@
 # boolzapp
 
 <p align="center">
-  https://github.com/Pierluca-Strianese/vue-boolzapp/assets/125388434/bb913db4-ac3b-489b-909e-0189c39a8a0a
+  <img src="https://drive.google.com/file/d/1pebjEN1zRD7EQNt_FE01devUFOwWHZ1Q/view?usp=drive_link"/>
 </p>
 
