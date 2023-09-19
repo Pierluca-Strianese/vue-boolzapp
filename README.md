@@ -1,5 +1,6 @@
 # boolzapp
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/89645358/166966611-9ee5e93d-47d2-47a4-bcc1-39d189355a23.gif"/>
+  https://github.com/Pierluca-Strianese/vue-boolzapp/assets/125388434/bb913db4-ac3b-489b-909e-0189c39a8a0a
 </p>
+
